@@ -3,8 +3,11 @@ let totalProducts = [];
 const productsTableElem = document.querySelector('#productsTable'); /*Selector de CSS*/
 
 const goToProductDetails = (productId) => {
+    // Busca un producto seleccionado de todos los productos
     const selectedProduct = totalProducts.find(product => product.id === productId);
+    // Guarda producto seleccionado en el local storage
     localStorage.setItem('selectedProduct', JSON.stringify(selectedProduct));
+    // Redirecciona a los detalles del producto
     window.location.href = `product-details.html?id=${productId}`;
 }; 
 
@@ -15,7 +18,7 @@ fetch('https://fakestoreapi.com/products')
         products.forEach(product => {
             tableContent += `<tr>
             <td>
-                <a href="#" onclick="goToProductDetails(${product.id})">${product.title}></a>
+                <a href="#" onclick="goToProductDetails(${product.id})">${product.title}</a>
             </td>
             <td>${product.price}</td>
             <td>
@@ -28,5 +31,4 @@ fetch('https://fakestoreapi.com/products')
             </tr>`;
         });
         productsTableElem.innerHTML = tableContent;
-        console.log(tableContent);
     });
